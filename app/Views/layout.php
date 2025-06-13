@@ -36,13 +36,8 @@ if (uri_string() != "") {
     <!-- Template Main CSS File -->
     <link href="<?= base_url() ?>NiceAdmin/assets/css/style.css" rel="stylesheet">
 
-    <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Updated: Mar 09 2023 with Bootstrap v5.2.3
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -60,13 +55,9 @@ if (uri_string() != "") {
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">Home</li>
-                    <?php
-                    if ($hlm != "Home") {
-                    ?>
+                    <?php if ($hlm != "Home") : ?>
                         <li class="breadcrumb-item"><?php echo $hlm ?></li>
-                    <?php
-                    }
-                    ?>
+                    <?php endif; ?>
                 </ol>
             </nav>
         </div>
@@ -74,14 +65,12 @@ if (uri_string() != "") {
         <section>
             <div class="row">
                 <div class="col-lg-12">
-
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $hlm ?></h5>
                         </div>
                         <?= $this->renderSection('content') ?>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -90,7 +79,15 @@ if (uri_string() != "") {
     <!-- ======= Footer ======= -->
     <?= $this->include('templates/footer') ?>
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
+
+    <!-- jQuery (duluan sebelum JS lain) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <!-- Vendor JS Files -->
     <script src="<?= base_url() ?>NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -104,6 +101,9 @@ if (uri_string() != "") {
 
     <!-- Template Main JS File -->
     <script src="<?= base_url() ?>NiceAdmin/assets/js/main.js"></script>
+
+    <!-- Tambahan script dari setiap view -->
+    <?= $this->renderSection('script') ?>
 
 </body>
 
