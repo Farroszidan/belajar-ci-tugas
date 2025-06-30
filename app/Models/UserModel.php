@@ -16,4 +16,5 @@ class UserModel extends Model
         'created_at',
         'updated_at'
     ];
+    protected $useTimestamps = true;
 }

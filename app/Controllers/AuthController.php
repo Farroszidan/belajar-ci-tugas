@@ -20,8 +20,8 @@ class AuthController extends BaseController
     {
         if ($this->request->getPost()) {
             $rules = [
-                'username' => 'required|min_length[6]',
-                'password' => 'required|min_length[7]|numeric',
+                'username' => 'required',
+                'password' => 'required'
             ];
 
             if ($this->validate($rules)) {
@@ -60,5 +60,35 @@ class AuthController extends BaseController
     {
         session()->destroy();
         return redirect()->to('login');
+    }
+
+    public function register()
+    {
+        return view('v_register'); // view yang sudah kamu buat
+    }
+
+    public function processRegister()
+    {
+        $rules = [
+            'username'      => 'required|min_length[4]|is_unique[user.username]',
+            'email'         => 'required|valid_email|is_unique[user.email]',
+            'password'      => 'required|min_length[6]',
+            'pass_confirm'  => 'required|matches[password]'
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('error', $this->validator->listErrors());
+        }
+
+        $data = [
+            'username' => $this->request->getPost('username'),
+            'email'    => $this->request->getPost('email'),
+            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            'role'     => 'guest'
+        ];
+
+        $this->user->save($data);
+
+        return redirect()->to('login')->with('success', 'Akun berhasil dibuat. Silakan login.');
     }
 }

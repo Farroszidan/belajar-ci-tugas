@@ -14,6 +14,10 @@ $routes->get('logout', 'AuthController::logout');
 $routes->get('produk', 'ProdukController::index', ['filter' => 'auth']);
 $routes->get('keranjang', 'TransaksiController::index', ['filter' => 'auth']);
 
+$routes->get('register', 'AuthController::register');
+$routes->post('register', 'AuthController::processRegister');
+
+
 // CRUD
 $routes->group('produk', ['filter' => 'auth'], function ($routes) {
     $routes->get('', 'ProdukController::index');

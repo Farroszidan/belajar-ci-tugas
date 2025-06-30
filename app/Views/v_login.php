@@ -1,5 +1,6 @@
 <?= $this->extend('layout_clear') ?>
 <?= $this->section('content') ?>
+
 <?php
 $username = [
     'name' => 'username',
@@ -27,7 +28,6 @@ $password = [
                 </div><!-- End Logo -->
 
                 <div class="card mb-3">
-
                     <div class="card-body">
 
                         <div class="pt-4 pb-2">
@@ -35,18 +35,18 @@ $password = [
                             <p class="text-center small">Enter your username & password to login</p>
                         </div>
 
-                        <?php
-                        if (session()->getFlashdata('failed')) {
-                        ?>
+                        <?php if (session()->getFlashdata('failed')) : ?>
                             <div class="col-12 alert alert-danger" role="alert">
                                 <hr>
-                                <p class="mb-0">
-                                    <?= session()->getFlashdata('failed') ?>
-                                </p>
+                                <p class="mb-0"><?= session()->getFlashdata('failed') ?></p>
                             </div>
-                        <?php
-                        }
-                        ?>
+                        <?php endif; ?>
+
+                        <?php if (session()->getFlashdata('success')) : ?>
+                            <div class="col-12 alert alert-success" role="alert">
+                                <p class="mb-0"><?= session()->getFlashdata('success') ?></p>
+                            </div>
+                        <?php endif; ?>
 
                         <?= form_open('login', 'class = "row g-3 needs-validation"') ?>
 
@@ -64,8 +64,14 @@ $password = [
                             <?= form_password($password) ?>
                             <div class="invalid-feedback">Please enter your password!</div>
                         </div>
+
                         <div class="col-12">
                             <?= form_submit('submit', 'Login', ['class' => 'btn btn-primary w-100']) ?>
+                        </div>
+
+                        <!-- Tambahan: Link ke Register -->
+                        <div class="col-12 text-center">
+                            <p class="small mb-0">Don't have an account? <a href="<?= base_url('register') ?>">Register here</a></p>
                         </div>
 
                         <?= form_close() ?>
@@ -74,16 +80,12 @@ $password = [
                 </div>
 
                 <div class="credits">
-                    <!-- All the links in the footer should remain intact. -->
-                    <!-- You can delete the links only if you purchased the pro version. -->
-                    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
                     Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
                 </div>
 
             </div>
         </div>
     </div>
-
 </section>
+
 <?= $this->endSection() ?>

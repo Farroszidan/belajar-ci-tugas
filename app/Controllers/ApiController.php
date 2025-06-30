@@ -16,6 +16,14 @@ class ApiController extends ResourceController
     protected $transaction;
     protected $transaction_detail;
 
+    public function __construct()
+    {
+        $this->apiKey = getenv('API_KEY');
+        $this->user = new UserModel();
+        $this->transaction = new TransactionModel();
+        $this->transaction_detail = new TransactionDetailModel();
+    }
+
     public function index()
     {
         $data = [

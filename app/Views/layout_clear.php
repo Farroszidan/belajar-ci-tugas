@@ -1,8 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>- Muphus - <?= isset($hlm) ? $hlm : '' ?></title>
+    <title>- Applepedia - <?= isset($hlm) ? $hlm : '' ?></title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -25,14 +28,6 @@
 
     <!-- Template Main CSS File -->
     <link href="<?= base_url() ?>NiceAdmin/assets/css/style.css" rel="stylesheet">
-
-    <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Updated: Mar 09 2023 with Bootstrap v5.2.3
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -40,7 +35,10 @@
         <?= $this->renderSection('content') ?>
     </main>
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
+
     <!-- Vendor JS Files -->
     <script src="<?= base_url() ?>NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
     <script src="<?= base_url() ?>NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -53,7 +51,6 @@
 
     <!-- Template Main JS File -->
     <script src="<?= base_url() ?>NiceAdmin/assets/js/main.js"></script>
-
 </body>
 
 </html>
