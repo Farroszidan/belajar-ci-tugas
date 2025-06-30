@@ -44,3 +44,9 @@ $routes->get('profile', 'Home::profile', ['filter' => 'auth']);
 
 // API
 $routes->resource('api', ['controller' => 'apiController']);
+$routes->get('api', 'ApiController::index');
+
+// Dashboard Toko
+$routes->get('dashboard-toko', 'DashboardToko::index', ['filter' => 'role:admin']);
+$routes->get('dashboard-toko/cetak', 'DashboardToko::cetak', ['filter' => 'role:admin']);
+$routes->get('dashboard-toko/api', 'DashboardToko::api', ['filter' => 'role:admin']);

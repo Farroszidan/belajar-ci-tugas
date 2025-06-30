@@ -16,18 +16,21 @@
                 <span>Keranjang</span>
             </a>
         </li><!-- End Keranjang Nav -->
-        <?php
-        if (session()->get('role') == 'admin') {
-        ?>
+        <?php if (session()->get('role') == 'admin') : ?>
             <li class="nav-item">
                 <a class="nav-link <?php echo (uri_string() == 'produk') ? "" : "collapsed" ?>" href="produk">
                     <i class="bi bi-receipt"></i>
                     <span>Produk</span>
                 </a>
             </li><!-- End Produk Nav -->
-        <?php
-        }
-        ?>
+
+            <li class="nav-item">
+                <a class="nav-link <?php echo (uri_string() == 'dashboard-toko') ? "" : "collapsed" ?>" href="dashboard-toko">
+                    <i class="bi bi-bar-chart"></i>
+                    <span>Dashboard Toko</span>
+                </a>
+            </li><!-- End Dashboard Toko Nav -->
+        <?php endif; ?>
         <li class="nav-item">
             <a class="nav-link <?php echo (uri_string() == 'profile') ? "" : "collapsed" ?>" href="profile">
                 <i class="bi bi-person"></i>
