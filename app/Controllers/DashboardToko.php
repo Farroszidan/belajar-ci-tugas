@@ -11,14 +11,16 @@ class DashboardToko extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, [
-            CURLOPT_URL => "http://localhost:8080/api",
+            CURLOPT_URL => "http://127.0.0.1:8080/api",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => [
                 "content-type: application/x-www-form-urlencoded",
                 "key: mangu12345678abcghi",
             ],
-            CURLOPT_TIMEOUT => 10, // batas waktu agar tidak buffering terus
+            CURLOPT_CONNECTTIMEOUT => 2,   // waktu tunggu koneksi
+            CURLOPT_TIMEOUT => 5,          // waktu tunggu keseluruhan request
+
         ]);
 
         $response = curl_exec($curl);

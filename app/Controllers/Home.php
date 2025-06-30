@@ -20,8 +20,12 @@ class Home extends BaseController
         $this->transaction = new TransactionModel();
         $this->transaction_detail = new TransactionDetailModel();
     }
-    public function index(): string
+    public function index()
     {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/login');
+        }
+
         $product = $this->product->findAll();
         $data['product'] = $product;
         return view('v_home', $data);
