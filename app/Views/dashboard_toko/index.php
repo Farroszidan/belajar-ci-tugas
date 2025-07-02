@@ -13,29 +13,33 @@
     <table class="table text-center">
         <thead>
             <tr>
-                <th style="width: 5%;">No</th>
-                <th style="width: 10%;">Username</th>
-                <th style="width: 30%;">Alamat</th>
-                <th style="width: 10%;">Total Harga</th>
-                <th style="width: 10%;">Ongkir</th>
-                <th style="width: 10%;">Status</th>
-                <th style="width: 25%;">Tanggal Transaksi</th>
+                <th>No</th>
+                <th>Username</th>
+                <th>Alamat</th>
+                <th>Total Harga</th>
+                <th>Ongkir</th>
+                <th>Status</th>
+                <th>Tanggal Transaksi</th>
             </tr>
         </thead>
         <tbody>
-            <?php $i = 1; ?>
-            <?php if (!empty($penjualan)): ?>
-                <?php foreach ($penjualan as $item): ?>
+            <?php if (!empty($transactions)): ?>
+                <?php $i = 1; ?>
+                <?php foreach ($transactions as $item): ?>
                     <tr>
                         <td><?= $i++ ?></td>
                         <td><?= esc($item['username']) ?></td>
                         <td><?= esc($item['alamat']) ?></td>
-                        <td><?= esc($item['total_harga']) ?></td>
-                        <td><?= esc($item['ongkir']) ?></td>
+                        <td><?= number_format($item['total_harga'], 0, ',', '.') ?></td>
+                        <td><?= number_format($item['ongkir'], 0, ',', '.') ?></td>
                         <td><?= esc($item['status']) ?></td>
-                        <td><?= esc($item['created_at']) ?></td>
+                        <td><?= date('d-m-Y H:i:s', strtotime($item['created_at'])) ?></td>
                     </tr>
                 <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="7">Tidak ada data transaksi.</td>
+                </tr>
             <?php endif; ?>
         </tbody>
     </table>
@@ -55,9 +59,8 @@
             document.getElementById("menit").textContent = now.getMinutes().toString().padStart(2, '0');
             document.getElementById("detik").textContent = now.getSeconds().toString().padStart(2, '0');
         }
-
-        updateClock(); // jalankan pertama kali
-        setInterval(updateClock, 1000); // update tiap 1 detik
+        updateClock();
+        setInterval(updateClock, 1000);
     });
 </script>
 <?= $this->endSection() ?>

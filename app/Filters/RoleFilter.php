@@ -11,10 +11,17 @@ class RoleFilter implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         $session = session();
-        if (!$session->get('isLoggedIn') || $session->get('role') !== 'admin') {
-            return redirect()->to('/login')->with('failed', 'Akses ditolak. Anda bukan admin.');
+
+        if (!$session->get('isLoggedIn')) {
+            return redirect()->to('/login')->with('failed', 'Silakan login terlebih dahulu.');
+        }
+
+        // Jika role user tidak termasuk yang diizinkan
+        if ($arguments && !in_array($session->get('role'), $arguments)) {
+            return redirect()->to('/')->with('failed', 'Akses ditolak.');
         }
     }
+
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {

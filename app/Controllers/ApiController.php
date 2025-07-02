@@ -18,7 +18,7 @@ class ApiController extends ResourceController
 
     public function __construct()
     {
-        $this->apiKey = getenv('API_KEY');
+        $this->apiKey = getenv('API_KEY'); // ambil dari .env
         $this->user = new UserModel();
         $this->transaction = new TransactionModel();
         $this->transaction_detail = new TransactionDetailModel();
@@ -26,32 +26,29 @@ class ApiController extends ResourceController
 
     public function index()
     {
+        $key = $this->request->getHeaderLine('Key');
         $data = [
             'results' => [],
-            'status' => ["code" => 401, "description" => "Unauthorized"]
+            'status' => ['code' => 401, 'description' => 'Unauthorized'],
         ];
 
-        $headers = $this->request->headers();
+        if ($key && $key === $this->apiKey) {
+            $penjualan = $this->transaction->findAll();
 
-        array_walk($headers, function (&$value, $key) {
-            $value = $value->getValue();
-        });
-
-        if (array_key_exists("Key", $headers)) {
-            if ($headers["Key"] == $this->apiKey) {
-                $penjualan = $this->transaction->findAll();
-
-                foreach ($penjualan as &$pj) {
-                    $pj['details'] = $this->transaction_detail->where('transaction_id', $pj['id'])->findAll();
-                }
-
-                $data['status'] = ["code" => 200, "description" => "OK"];
-                $data['results'] = $penjualan;
+            foreach ($penjualan as &$pj) {
+                $pj['details'] = $this->transaction_detail
+                    ->where('transaction_id', $pj['id'])
+                    ->findAll();
             }
+
+            $data['results'] = $penjualan;
+            $data['status'] = ['code' => 200, 'description' => 'OK'];
         }
 
         return $this->respond($data);
     }
+
+
 
     /**
      * Return the properties of a resource object.

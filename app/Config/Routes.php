@@ -47,6 +47,6 @@ $routes->resource('api', ['controller' => 'apiController']);
 $routes->get('api', 'ApiController::index');
 
 // Dashboard Toko
-$routes->get('dashboard-toko', 'DashboardToko::index', ['filter' => 'role:admin']);
-$routes->get('dashboard-toko/cetak', 'DashboardToko::cetak', ['filter' => 'role:admin']);
-$routes->get('dashboard-toko/api', 'DashboardToko::api', ['filter' => 'role:admin']);
+$routes->get('dashboard-toko', 'Dashboard::index', ['filter' => 'role:admin']);
+$routes->get('dashboard-toko/cetak', 'Dashboard::exportPdf', ['filter' => 'role:admin']);
+$routes->get('dashboard-toko/api', 'Dashboard::api', ['filter' => 'role:admin']); // ini belum ada method `api`, hati-hati
